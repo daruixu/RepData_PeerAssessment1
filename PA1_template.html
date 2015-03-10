@@ -68,8 +68,8 @@ img {
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and Preprocessing the Data</h2>
 <p>The dataset was first unzipped and loaded using the following commands:</p>
-<pre class="r"><code>#datafile&lt;-&quot;activity.zip&quot;
-#unzip(datafile) #this produces the activity.csv file
+<pre class="r"><code>datafile&lt;-&quot;activity.zip&quot;
+unzip(datafile) #this produces the activity.csv file
 df&lt;-read.csv(&quot;activity.csv&quot;, stringsAsFactors=FALSE)</code></pre>
 <p>The dateframe was then coverted to dplyr:tbl_df and the class of the column date was changed from string to POSIXct:</p>
 <pre class="r"><code>library(dplyr)

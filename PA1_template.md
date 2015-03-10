@@ -7,8 +7,8 @@ The dataset was first unzipped and loaded using the following commands:
 
 
 ```r
-#datafile<-"activity.zip"
-#unzip(datafile) #this produces the activity.csv file
+datafile<-"activity.zip"
+unzip(datafile) #this produces the activity.csv file
 df<-read.csv("activity.csv", stringsAsFactors=FALSE)
 ```
 
