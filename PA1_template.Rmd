@@ -26,7 +26,7 @@ activity<-tbl_df(mutate(df, date=ymd(date)))
 
 ##What is mean total number of steps taken per day?  
 **1. Calculate the total steps taken in a day and ignore the missing values**  
-A new data table named `stepsByDay` was created by grouping the dataset by date then and summing up the steps taken on each day with the following commands:
+A new data table named `stepsByDay` was created by grouping the dataset by date and summing up the steps taken on each day with the following commands:
 ```{r}
 stepsByDay<-activity %>% group_by(date) %>% summarize(total_steps=sum(steps, na.rm=TRUE))
 ```
@@ -40,7 +40,7 @@ hist(stepsByDay$total_steps, main="Histogram of steps taken per day", xlab="Numb
 Note that according to the assignment rubric, the missing values are to be ignored. The proper way of *ignoring* the missing value is to eliminate the days with missing values. For example, on October 1, 2012, all the intervals have the steps as 'NA'. Then October 1, 2012 should not be included in the analysis. One way is to use the filter function as follows:
 
 ```{r, eval=FALSE}
-stepsByDay<-activity %>% filter(!is.na(steps)) %>% group_by(date) %>% summarize(total_steps=sum(steps))
+activity %>% filter(!is.na(steps)) %>% group_by(date) %>% summarize(total_steps=sum(steps))
 ```
 Using the option `na.rm=TRUE` instead of `filter`, will include October 1, 2012 in the analysis with total steps as zero and bias the mean and median results. However, this is helpful when answering question 4 of the imputing missing values section.
 
@@ -56,7 +56,7 @@ The number of steps taken for each of the 5-minute interval, averaged across all
 ```{r}
 stepsByInterval<-activity%>%group_by(interval)%>%summarize(average_steps=mean(steps, na.rm=TRUE))
 ```
-Note that here, I didn't filter the data table first. It is fine since there is at least one non-NA value for each interval. 
+ 
 
 **1. A time series plot shows the daily activity**:
 ```{r}
@@ -99,7 +99,7 @@ sprintf("The mean of the total number of steps taken per day is %5.0f steps", me
 sprintf("The median of the total number of steps taken per day is %5.0f steps", median(imputed_stepsByDay$total_steps))
 ```
 
-Imputing missing values increases both the medium and mean steps taken in each day. This is due to the fact that the days with all 'NA' as number of steps taken (like October 1, 2012) are not treated as zero steps in the analysis. It is also evident from the histogram that the number of days with 0-5000 steps taken decreases from 13 to 5, while the number of days with 10,000-15,000 steps increases from 28 to 36.  
+Imputing missing values increases both the medium and mean steps taken in each day. This is due to the fact that the days with all 'NA' as number of steps taken (like October 1, 2012) are not treated as zero steps anymore. It is also evident from the histogram that the number of days with 0-5000 steps taken decreases from 13 to 5, while the number of days with 10,000-15,000 steps increases from 28 to 36.  
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
